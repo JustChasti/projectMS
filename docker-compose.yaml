@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:15.1
+    environment:
+      POSTGRES_DB: "msproject"
+      POSTGRES_USER: "gray"
+      POSTGRES_PASSWORD: "qm7hFSIW"
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    image: fastapi
+    container_name: api
+    env_file:
+      - api/.env
+    restart: always
+    tty: True
+    working_dir: /api
+    ports:
+      - 8000:8000
