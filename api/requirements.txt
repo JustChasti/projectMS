@@ -5,3 +5,5 @@ loguru
 psycopg2-binary
 SQLAlchemy
 python-dotenv
+bcrypt
+python-jose

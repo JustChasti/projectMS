@@ -1,2 +1,5 @@
 /api/venv
 api/.env
+.vscode/settings.json
+api/test.py
+api/__pycache__/config.cpython-310.pyc
