@@ -16,14 +16,14 @@ def get_user_token(user_model):
         encrytp_salt
     ).decode('utf-8')
     user = session.query(User).filter_by(
-        username=user_model['username'],
+        login=user_model['login'],
         password=encrypted_password
     ).scalar()
     session.close()
     if not user:
         return {'message': f'Username or pasword unmatch'}
     data = {
-        'username': user.username
+        'login': user.login
     }
     expire = datetime.now() + timedelta(days=jwt_exp_days)
     data.update({"exp": expire})
@@ -40,7 +40,8 @@ def get_user_info(token):
         return {'message': e}
     session = Session()
     user = session.query(User).filter_by(
-        username=payload['username']
+        login=payload['login']
     ).scalar()
     session.close()
-    return {'message': user.username}
+    data = user.__dict__
+    return {'message': data}

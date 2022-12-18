@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 
 from user.models import UserRegistrModel
 from user.creation import create_user
@@ -22,5 +22,5 @@ async def get_my_info(token: str):
 
 
 @user_router.get('/user/token', response_class=JSONResponse)
-async def get_token(username: str, password: str):
-    return get_user_token({'username': username, 'password': password})
+async def get_token(login: str, password: str):
+    return get_user_token({'login': login, 'password': password})

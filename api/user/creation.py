@@ -13,9 +13,15 @@ def create_user(user_model: UserRegistrModel):
         user_model.password.encode('utf-8'),
         encrytp_salt
     ).decode('utf-8')
-    user = User(username=user_model.username, password=encrypted_password)
+    user = User(
+        name=user_model.name,
+        surname=user_model.surname,
+        phone=user_model.phone,
+        login=user_model.login,
+        password=encrypted_password,
+    )
     session = Session()
     session.add(user)
     session.commit()
     session.close()
-    return {'message': f'User {user_model.username} created'}
+    return {'message': f'User {user_model.name} created'}
